@@ -1,11 +1,13 @@
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 
 function App() {
   return (
     <>
+      <Navbar />
       <Home />
-      {/* <Home /> se eu chamar varias vezes, chama-se empilhamento de Componentes */}
-
+      <Footer /> 
     </>
   );
 }
