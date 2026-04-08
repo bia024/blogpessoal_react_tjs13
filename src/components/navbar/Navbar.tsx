@@ -1,15 +1,14 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/AuthContext";
+import { useDarkMode } from "../../hooks/useDarkMode";
+import { Moon, Sun, UserCircle } from "@phosphor-icons/react";
 
 function Navbar() {
 
-    // Objeto responsável por redirecionar o usuário para uma outra rota
     const navigate = useNavigate();
-
-    // Consumo do Contexto AuthContext 
-    // usamos a desestruturação para selecionar apenas o que precisamos
-    const { handleLogout } = useContext(AuthContext);
+    const { usuario, handleLogout } = useContext(AuthContext);
+    const { darkMode, toggleDarkMode } = useDarkMode();
 
     function logout(){
         handleLogout();
@@ -28,14 +27,30 @@ function Navbar() {
                         Blog Pessoal
                     </Link>
 
-                    <div className='flex gap-4'>
+                    <div className='flex gap-4 items-center'>
                         Postagens
-                        Temas
-                        Cadastrar tema
+                        <Link to='/temas' className='hover:underline'>Temas</Link>
+                        <Link to='/cadastrartema' className='hover:underline'>Cadastrar tema</Link>
                         Perfil
                         <Link to='' onClick={logout} className="hover:underline">
                             Sair
                         </Link>
+                        {usuario.token !== '' && (
+                            <Link to='/perfil'>
+                                {usuario.foto ? (
+                                    <img
+                                        src={usuario.foto}
+                                        alt={usuario.nome}
+                                        className='w-9 h-9 rounded-full object-cover border-2 border-white hover:opacity-80'
+                                    />
+                                ) : (
+                                    <UserCircle size={36} weight="fill" className="hover:opacity-80" />
+                                )}
+                            </Link>
+                        )}
+                        <button onClick={toggleDarkMode}>
+                            {darkMode ? <Sun size={22} weight="bold" /> : <Moon size={22} weight="bold" />}
+                        </button>
                     </div>
                 </div>
             </div>

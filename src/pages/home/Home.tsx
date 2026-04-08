@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Home() {
     return (
         <>
@@ -21,10 +23,10 @@ function Home() {
                         </p>
 
                         <div className="flex justify-around gap-4">
-                            <div className='rounded text-white 
+                            <Link to='/postagens' className='rounded text-white 
                                             border-white border-solid border-2 py-2 px-4'>
                                 Nova Postagem
-                            </div>
+                            </Link>
                         </div>
                     </div>
 
